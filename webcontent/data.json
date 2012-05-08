@@ -1,0 +1,102 @@
+{
+ "kind": "calendar#events",
+ "etag": "\"DtwDXDyBz5ZZP0Bus85WBYkv-64/5ayAg8_sJkJP8Yzp1TN9C6iAZGU\"",
+ "summary": "TestKalender",
+ "description": "Google Calendar API test",
+ "updated": "2012-05-01T08:08:39.000Z",
+ "timeZone": "Europe/Paris",
+ "accessRole": "reader",
+ "items": [
+  {
+   "kind": "calendar#event",
+   "etag": "\"DtwDXDyBz5ZZP0Bus85WBYkv-64/Q0tpZnRMdndKaEVBQUFBQUFBQUFBQT09\"",
+   "id": "tjadq9ipm0a80cq9gn1pqsid8g",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=dGphZHE5aXBtMGE4MGNxOWduMXBxc2lkOGcgYTBpMm4xMXNjMGU3NGQ4MTNpc2hicGlpc29AZw",
+   "created": "2012-05-01T08:02:36.000Z",
+   "updated": "2012-05-01T08:03:37.000Z",
+   "summary": "Homologe Logohome - Manuel Blickle",
+   "description": "Die SFH eines hamiltonschen Symplektomorphismus F ist isomorph zur singulären Homologie der zugrundeliegenden Mannigfaltigkeit M. Daher liefern die Summen der Betti-Zahlen von M eine untere Grenze für die Anzahl der Fixpunkte eines nicht-entarteten Symplektomorphismus F (Arnold-Vermutung). Die SFH eines hamiltonschen Symplektomorphismus F haben außerdem ein \"pair of pants\" Produkt, das ein deformiertes Cup-Produkt äquivalent zur Quantenkohomologie ist.",
+   "location": "Übungsraum K4, Mathe-Institut",
+   "creator": {
+    "email": "a0i2n11sc0e74d813ishbpiiso@group.calendar.google.com",
+    "displayName": "TestKalender"
+   },
+   "organizer": {
+    "email": "a0i2n11sc0e74d813ishbpiiso@group.calendar.google.com",
+    "displayName": "TestKalender"
+   },
+   "start": {
+    "dateTime": "2012-05-03T10:00:00+02:00"
+   },
+   "end": {
+    "dateTime": "2012-05-03T11:00:00+02:00"
+   },
+   "transparency": "transparent",
+   "iCalUID": "tjadq9ipm0a80cq9gn1pqsid8g@google.com",
+   "sequence": 1,
+   "guestsCanInviteOthers": true,
+   "guestsCanSeeOtherGuests": true
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"DtwDXDyBz5ZZP0Bus85WBYkv-64/Q01EX3U3dndKaEVBQUFBQUFBQUFBQT09\"",
+   "id": "im72vs9gl7710vhslc2cju791g",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=aW03MnZzOWdsNzcxMHZoc2xjMmNqdTc5MWcgYTBpMm4xMXNjMGU3NGQ4MTNpc2hicGlpc29AZw",
+   "created": "2012-05-01T08:05:37.000Z",
+   "updated": "2012-05-01T08:05:44.000Z",
+   "summary": "Rotationsinvariante Rotationen in 0-dimensionalen Vektorräumen - Andreas Hölzl",
+   "description": "Analog zum Beweis von lemma:4-4 ist A messbar. Zunächst sei  r  beschränkt mit kompaktem Träger. Daraus folgt, dass   ΧA   integrierbar ist. Nach dem Prinzip von Cavalieri (siehe sect:4-3-(1)) sowie sect:4-3-(3) folgt ...",
+   "location": "Hörsaal 2 - KG 4",
+   "creator": {
+    "email": "a0i2n11sc0e74d813ishbpiiso@group.calendar.google.com",
+    "displayName": "TestKalender"
+   },
+   "organizer": {
+    "email": "a0i2n11sc0e74d813ishbpiiso@group.calendar.google.com",
+    "displayName": "TestKalender"
+   },
+   "start": {
+    "dateTime": "2012-05-03T13:00:00+02:00"
+   },
+   "end": {
+    "dateTime": "2012-05-03T14:00:00+02:00"
+   },
+   "iCalUID": "im72vs9gl7710vhslc2cju791g@google.com",
+   "sequence": 0,
+   "guestsCanInviteOthers": true,
+   "guestsCanSeeOtherGuests": true
+  },
+  {
+   "kind": "calendar#event",
+   "etag": "\"DtwDXDyBz5ZZP0Bus85WBYkv-64/Q05qV3hydndKaEVBQUFBQUFBQUFBQT09\"",
+   "id": "052k5rui3tkb9fisvrb3raeml4",
+   "status": "confirmed",
+   "htmlLink": "https://www.google.com/calendar/event?eid=MDUyazVydWkzdGtiOWZpc3ZyYjNyYWVtbDQgYTBpMm4xMXNjMGU3NGQ4MTNpc2hicGlpc29AZw",
+   "created": "2012-05-01T08:08:39.000Z",
+   "updated": "2012-05-01T08:08:39.000Z",
+   "summary": "Isotonische Isomorphien in i-dimensionalen Integralen - Fred Feuerstein",
+   "description": "Gegeben seien X1 = (V1,E1) und X2 = (V2,E2)\nEine bijektive Abbildung φ: V1→V2 heißt ein ISOMORPHISMUS von X1 auf X2, wenn gilt: [x,y] ⇔ [φ(x), φ(y)] ∈ E2; X1 ≈ X2",
+   "location": "Hörsaal 3 - KG 1",
+   "creator": {
+    "email": "a0i2n11sc0e74d813ishbpiiso@group.calendar.google.com",
+    "displayName": "TestKalender"
+   },
+   "organizer": {
+    "email": "a0i2n11sc0e74d813ishbpiiso@group.calendar.google.com",
+    "displayName": "TestKalender"
+   },
+   "start": {
+    "dateTime": "2012-05-04T09:00:00+02:00"
+   },
+   "end": {
+    "dateTime": "2012-05-04T10:00:00+02:00"
+   },
+   "iCalUID": "052k5rui3tkb9fisvrb3raeml4@google.com",
+   "sequence": 0,
+   "guestsCanInviteOthers": true,
+   "guestsCanSeeOtherGuests": true
+  }
+ ]
+}

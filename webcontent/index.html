@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<!--
+  Copyright © Andreas Hölzl
+  @author twitter.com/andywoodly
+-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+
+    <link rel="stylesheet" href="styles/main.css"/>
+
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script src="javascript/utils.js"></script>
+    <script src="javascript/app.js"></script>
+
+    <script type="text/javascript">
+
+        // https://www.googleapis.com/calendar/v3/calendars/a0i2n11sc0e74d813ishbpiiso%40group.calendar.google.com/events?key=AIzaSyBxpeKeOwcenFKoYcjA4wMeVCEPdpN7GRo
+
+        var getCalendarUrl = function () {
+            var baseUrl = 'https://www.googleapis.com/calendar/v3/calendars/';
+            var calId = 'a0i2n11sc0e74d813ishbpiiso%40group.calendar.google.com';
+            var apiKey = 'AIzaSyBxpeKeOwcenFKoYcjA4wMeVCEPdpN7GRo';
+            var timezone = 'Europe/Paris';
+
+            //return baseUrl+calId+"/events?key="+apiKey;
+            return "data.json";
+        };
+
+        var loadCalendar = function () {
+
+            var failureHandler = function (url, status) {
+                var loading_img = document.getElementById('loading_img');
+                loading_img.style.visibility = 'hidden';
+                var loading_text = document.getElementById('loading_text');
+                loading_text.innerHtml = 'Failed to load url ' + url + ', reason: ' + status;
+            };
+
+            Utils.getFile(getCalendarUrl(), function (response) {
+
+                var main = document.getElementById('main');
+                Utils.removeChildren(main);
+
+                var data = JSON.parse(response);
+                console.log(data);
+
+                Utils.each(data.items, function (item) {
+                    var newInstance = Utils.clone('EventTemplate');
+                    newInstance.style.visibility = 'visible';
+
+                    var eventTitle = Utils.xpath("./div[contains(@class, 'eventTitle')]", newInstance);
+                    eventTitle.innerHTML = item.summary;
+
+                    var eventDescription = Utils.xpath("./div[contains(@class, 'eventDescription')]", newInstance);
+                    eventDescription.innerHTML = item.description;
+
+                    main.appendChild(newInstance);
+                });
+
+                // apply MathJax styling
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            }, failureHandler);
+        }
+
+    </script>
+</head>
+
+<body onload='loadCalendar()'>
+
+<div id='main'>
+    <div id='msg_frame'>
+        <div id='msg_content'>
+            <div id='loading_img'>
+                <img src="http://wikihood.com/web/images/loading.gif"/>
+            </div>
+            <div id='loading_text'>Loading calendar ...</div>
+        </div>
+    </div>
+</div>
+
+<div id='EventTemplate' class='event' style="visibility:hidden">
+    <div class='eventTitle'></div>
+    <div class='eventDescription'></div>
+</div>
+
+</body>
+
+</html>
