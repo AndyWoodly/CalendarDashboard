@@ -1,7 +1,7 @@
 /* 
  * Copyright Adam Iley
  * 
- * @author adam@dawikihood.com
+ * @author adam@dawikihood.com, andy.woodly@googlemail.com
  */
 
 var Utils = (function() {
@@ -170,7 +170,15 @@ var Utils = (function() {
 		localStorage.lastPosition = JSON.stringify(coords);
 	}
 
+    Utils.prototype.trim = function trim(text) {
+        if (text === undefined) {
+            return text;
+        }
+        return text.replace (/^\s+/, '').replace (/\s+$/, '');
+    };
+
 	return new Utils();
+
 })();
 
 

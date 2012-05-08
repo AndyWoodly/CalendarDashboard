@@ -3,6 +3,8 @@
  @author twitter.com/andywoodly
 */
 
+var CalDash = {};
+
 var Event = (function(){
 
 	function Event(params) {
@@ -70,37 +72,34 @@ GoogleConverter.convert = function(item) {
 
 // utilities
 
-function trim(text) {
-	if (text === undefined) {
-		return text;
-	}
-	return text.replace (/^\s+/, '').replace (/\s+$/, '');
-}
+CalDash.utils = {
 
-// Serie -- Vorname Name: Titel
-function parseTitle(text) {
-	var result = {};
+    // "Serie -- Vorname Name: Titel"
+    parseTitle: function (text) {
+        var result = {};
         if (text !== undefined) {
-		var parts = text.split("--");
-		if (parts.length == 2) {
-			result.type = trim(parts[0]);
-			parseNameTitle(parts[1], result);
-		} else {
-			parseNameTitle(text, result);
-		}
-	}
-	return result;
-}
+            var parts = text.split("--");
+            if (parts.length == 2) {
+                result.type = Utils.trim(parts[0]);
+                this.parseNameTitle(parts[1], result);
+            } else {
+                this.parseNameTitle(text, result);
+            }
+        }
+        return result;
+    },
 
-function parseNameTitle(text, result) {
-	if (text !== undefined) {
-		var nameTitle = text.split(":", 2);
-		if (nameTitle.length == 2) {
-			result.person = trim(nameTitle[0]);
-			result.title = trim(nameTitle[1]);
-		} else {
-			result.title = trim(text);
-		}
-	}
-}
+    parseNameTitle: function (text, result) {
+        if (text !== undefined) {
+            var nameTitle = text.split(":", 2);
+            if (nameTitle.length == 2) {
+                result.person = Utils.trim(nameTitle[0]);
+                result.title = Utils.trim(nameTitle[1]);
+            } else {
+                result.title = Utils.trim(text);
+            }
+        }
+    }
+
+};
 
