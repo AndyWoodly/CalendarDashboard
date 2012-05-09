@@ -14,8 +14,8 @@ var Event = (function(){
 		this.description = (undefined === params.description ? '' : params.description);
 		this.person = (undefined === params.person ? '' : params.person);
 		this.location = (undefined === params.location ? '' : params.location);
-		this.startDate = (undefined === params.startDate ? '' : params.startDate);
-		this.endDate = (undefined === params.endDate ? '' : params.endDate);
+		this.startDate = (undefined === params.startDate ? undefined : params.startDate);
+		this.endDate = (undefined === params.endDate ? undefined : params.endDate);
 	}
 
 	Event.prototype.getType = function() {
@@ -51,17 +51,18 @@ var Event = (function(){
 })();
 
 
-var Dashboard = (function(){
+var EventManager = (function(){
 
-    function Dashboard(params) {
+    function EventManager(params) {
         params = params || {};
         this.events = (undefined === params.events ? [] : params.events);
+        this.events.sort();
         this.nextEvent = (this.events.length > 0 ? [0] : new Event());
         this.dates = [];
         this.dateEvents = {};
     }
 
-    Dashboard.prototype.update = function(date) {
+    EventManager.prototype.update = function(date) {
         this.date = date || new Date();
         Utils.each(this.events, function(event) {
 
@@ -69,19 +70,19 @@ var Dashboard = (function(){
         // TODO
     };
 
-    Dashboard.prototype.getNextEvent = function() {
+    EventManager.prototype.getNextEvent = function() {
         return this.nextEvent;
     };
 
-    Dashboard.prototype.getDates = function() {
+    EventManager.prototype.getDates = function() {
         return this.dates;
     };
 
-    Dashboard.prototype.getEventsForDate = function(date) {
+    EventManager.prototype.getEventsForDate = function(date) {
         return this.dateEvents[date];
     };
 
-    return Dashboard;
+    return EventManager;
 
 })();
 
