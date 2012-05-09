@@ -1,6 +1,7 @@
 var config = module.exports;
 
 config["Browser tests"] = {
+
     environment: "browser",
 
     libs: [
@@ -13,4 +14,5 @@ config["Browser tests"] = {
     tests: [
         "**/*-test.js"
     ]
+
 };

@@ -51,6 +51,41 @@ var Event = (function(){
 })();
 
 
+var Dashboard = (function(){
+
+    function Dashboard(params) {
+        params = params || {};
+        this.events = (undefined === params.events ? [] : params.events);
+        this.nextEvent = (this.events.length > 0 ? [0] : new Event());
+        this.dates = [];
+        this.dateEvents = {};
+    }
+
+    Dashboard.prototype.update = function(date) {
+        this.date = date || new Date();
+        Utils.each(this.events, function(event) {
+
+        });
+        // TODO
+    };
+
+    Dashboard.prototype.getNextEvent = function() {
+        return this.nextEvent;
+    };
+
+    Dashboard.prototype.getDates = function() {
+        return this.dates;
+    };
+
+    Dashboard.prototype.getEventsForDate = function(date) {
+        return this.dateEvents[date];
+    };
+
+    return Dashboard;
+
+})();
+
+
 // calendar converter
 
 function GoogleConverter() {}

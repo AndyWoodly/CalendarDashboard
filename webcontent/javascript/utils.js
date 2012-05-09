@@ -1,12 +1,13 @@
 /* 
- * Copyright Adam Iley
+ * Copyright Adam Iley, Andreas Hölzl
  * 
- * @author adam@dawikihood.com, andy.woodly@googlemail.com
+ * @author kybernetikos@gmail.com
+ * @author andy.woodly@googlemail.com
  */
 
 var Utils = (function() {
     
-	function Utils() {};
+	function Utils() {}
 	
 	Utils.prototype.extend = function(subclass, superclass) {
 		var intermediate = function() {};
