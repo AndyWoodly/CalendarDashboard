@@ -64,10 +64,14 @@ var EventManager = (function(){
 
     EventManager.prototype.update = function(date) {
         this.date = date || new Date();
+        var currDate = this.date;
+        var newEvents = [];
         Utils.each(this.events, function(event) {
+            if (currDate <= event.getStartDate() || currDate < event.getEndDate()) {
+                newEvents.push(event);
 
+            }
         });
-        // TODO
     };
 
     EventManager.prototype.getNextEvent = function() {

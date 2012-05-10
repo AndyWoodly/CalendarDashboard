@@ -38,8 +38,7 @@
                 loading_text.innerHtml = 'Failed to load url ' + url + ', reason: ' + status;
             };
 
-            Utils.getFile(getCalendarUrl(), function (response) {
-
+            var successHandler = function (response) {
                 var main = document.getElementById('main');
                 Utils.removeChildren(main);
 
@@ -61,7 +60,9 @@
 
                 // apply MathJax styling
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-            }, failureHandler);
+            };
+
+            Utils.getFile(getCalendarUrl(), successHandler, failureHandler);
         }
 
     </script>
