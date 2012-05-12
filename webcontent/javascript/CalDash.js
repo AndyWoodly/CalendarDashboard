@@ -55,23 +55,53 @@ var EventManager = (function(){
 
     function EventManager(params) {
         params = params || {};
-        this.events = (undefined === params.events ? [] : params.events);
-        this.events.sort();
-        this.nextEvent = (this.events.length > 0 ? [0] : new Event());
+        this.setEvents(params.events);
         this.dates = [];
         this.dateEvents = {};
     }
 
     EventManager.prototype.update = function(date) {
         this.date = date || new Date();
-        var currDate = this.date;
-        var newEvents = [];
+        var uEvents = [];
+        var uDates = {};
+        var uDateEvents = {};
+        var me = this;
         Utils.each(this.events, function(event) {
-            if (currDate <= event.getStartDate() || currDate < event.getEndDate()) {
-                newEvents.push(event);
-
+            if (me.date <= event.getStartDate() || me.date < event.getEndDate()) {
+                uEvents.push(event);
+                var eventDate = (me.date <= event.getStartDate() ? event.getStartDate() : event.getEndDate());
+                eventDate = eventDate.clone().clearTime();
+                uDates[eventDate] = true;
+                var events = uDateEvents[eventDate];
+                if (events === undefined) {
+                    events = [];
+                    uDateEvents[eventDate] = events;
+                }
+                events.push(event);
             }
         });
+        this.setEvents(uEvents);
+        var uDatesArray = [];
+        var d;
+        for (d in uDates) {
+            uDatesArray.push(d);
+        }
+        uDatesArray.sort();
+        this.dates = uDatesArray;
+        this.dateEvents = uDateEvents;
+    };
+
+    EventManager.prototype.getEvents = function() {
+        return this.events;
+    };
+
+    EventManager.prototype.setEvents = function(events) {
+        this.events = (undefined === events ? [] : events);
+        this.events.sort(function (a, b) {
+            // start date sort
+            return a.getStartDate().getTime() - b.getStartDate().getTime();
+        });
+        this.nextEvent = (this.events.length > 0 ? this.events[0] : undefined);
     };
 
     EventManager.prototype.getNextEvent = function() {

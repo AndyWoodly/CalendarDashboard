@@ -36,7 +36,7 @@ buster.testCase("CalDash - ", {
 
 });
 
-buster.testCase("Model - ", {
+buster.testCase("Event - ", {
 
     "event model" : function() {
         var params = {};
