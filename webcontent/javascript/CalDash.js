@@ -84,7 +84,7 @@ var EventManager = (function(){
         var uDatesArray = [];
         var d;
         for (d in uDates) {
-            uDatesArray.push(d);
+            uDatesArray.push(new Date(Date.parse(d)));
         }
         uDatesArray.sort();
         this.dates = uDatesArray;
