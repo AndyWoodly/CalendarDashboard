@@ -1,13 +1,9 @@
 var assert = buster.assertions.assert;
 var refute = buster.assertions.refute;
 
-buster.testCase("Utilities - ", {
+buster.testCase("Utils - ", {
 
-    setUp: function () {
-
-    },
-
-    "trim() utility works with undefined" : function() {
+    "trim() utility works correctly, even with undefined" : function() {
         assert.equals("hello", Utils.trim(" hello"));
         assert.equals("hello", Utils.trim("  hello "));
         assert.equals("hello", Utils.trim("hello "));

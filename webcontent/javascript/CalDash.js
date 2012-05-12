@@ -127,7 +127,7 @@ function GoogleConverter() {}
 
 GoogleConverter.convert = function(item) {
     var params = {};
-    var titleParts = parseTitle(item.summary);
+    var titleParts = CalDash.utils.parseTitle(item.summary);
     params.type = titleParts.type;
     params.title = titleParts.title;
     params.person = titleParts.person;
@@ -144,7 +144,7 @@ GoogleConverter.convert = function(item) {
 
 CalDash.utils = {
 
-    // "Serie -- Vorname Name: Titel"
+    // Format: "Serie -- Vorname Name: Titel"
     parseTitle: function (text) {
         var result = {};
         if (text !== undefined) {

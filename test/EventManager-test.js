@@ -29,10 +29,9 @@ buster.testCase("EventManager - ", {
         this.manager = new EventManager(
                 { events: [event2, event1, event3] }
         );
-
     },
 
-    "update - include all events" : function() {
+    "update - all events included" : function() {
         var manager = this.manager;
 
         assert.equals("event1", manager.getNextEvent().getTitle());

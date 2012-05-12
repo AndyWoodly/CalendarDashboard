@@ -35,28 +35,3 @@ buster.testCase("CalDash - ", {
     }
 
 });
-
-buster.testCase("Event - ", {
-
-    "event model" : function() {
-        var params = {};
-        params.type = 'type';
-        params.title = 'title';
-        params.person = 'person';
-        params.location = 'location';
-        params.description = 'description';
-        params.startDate = new Date(Date.parse("2012-05-03T10:00:00+00:00"));
-        params.endDate = new Date(Date.parse("2012-05-03T11:00:00+00:00"));
-        var event = new Event(params);
-
-        assert.equals("type", event.getType());
-        assert.equals("title", event.getTitle());
-        assert.equals("person", event.getPerson());
-        assert.equals("location", event.getLocation());
-        assert.equals("description", event.getDescription());
-
-        assert.equals(12, event.getStartDate().getHours());
-        assert.equals(13, event.getEndDate().getHours());
-    }
-
-});
