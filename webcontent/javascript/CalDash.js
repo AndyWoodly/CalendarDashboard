@@ -125,7 +125,7 @@ var EventManager = (function(){
 
 function GoogleConverter() {}
 
-GoogleConverter.convert = function(item) {
+GoogleConverter.convertItem = function(item) {
     var params = {};
     var titleParts = CalDash.utils.parseTitle(item.summary);
     params.type = titleParts.type;
@@ -137,6 +137,20 @@ GoogleConverter.convert = function(item) {
     params.startDate = new Date(Date.parse(item.start.dateTime));
     params.endDate = new Date(Date.parse(item.end.dateTime));
     return new Event(params);
+};
+
+GoogleConverter.convert = function(data) {
+    var items;
+    if (data instanceof Array) {
+        items = data;
+    } else {
+        items = data.items;
+    }
+    var events = [];
+    Utils.each(items, function(item) {
+        events.push(GoogleConverter.convertItem(item));
+    });
+    return events;
 };
 
 

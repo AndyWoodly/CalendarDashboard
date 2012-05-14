@@ -8,11 +8,11 @@ config["Browser tests"] = {
     ],
 
     src: [
-        "../webcontent/javascript/*.js"
+        "webcontent/javascript/*.js"
     ],
 
     tests: [
-        "**/*-test.js"
+        "tests/**/*-test.js"
     ]
 
 };
