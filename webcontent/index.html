@@ -32,38 +32,25 @@
             return "data.json";
         };
 
-        /*
-         <div id='next_event'>
-             <div id='event_header'>
-                 <div id='event_type'></div>
-                 <div id='event_location'></div>
-                 <div id='event_person'></div>
-                 <div id='event_title'></div>
-             </div>
-             <div id='event_start'></div>
-             <div id='event_timer'></div>
-             <div id='event_abstract'></div>
-         </div>
-         */
         var updateNextEvent = function(event) {
             var ne = document.getElementById('next_event');
-            var header = ne.getElementById('event_header');
+            var header = document.getElementById('event_header');
 
-            var type = header.getElementById('event_type');
+            var type = document.getElementById('event_type');
             type.innerHTML = event.getType();
-            var person = header.getElementById('event_person');
+            var person = document.getElementById('event_person');
             person.innerHTML = event.getPerson();
-            var title = header.getElementById('event_title');
+            var title = document.getElementById('event_title');
             title.innerHTML = event.getTitle();
-            var location = header.getElementById('event_location');
+            var location = document.getElementById('event_location');
             location.innerHTML = event.getLocation();
 
-            var start = ne.getElementById('event_start');
+            var start = document.getElementById('event_start');
             start.innerHTML = event.getStartDate();
-            var timer = ne.getElementById('event_timer');
+            var timer = document.getElementById('event_timer');
             timer.innerHTML = "TODO timer";
 
-            var description = ne.getElementById('event_abstract');
+            var description = document.getElementById('event_abstract');
             description.innerHTML = event.getDescription();
 
             // apply MathJax styling
@@ -86,20 +73,20 @@
                         detail_pane.appendChild(dateInstance);
 
                         var dateHeader = Utils.xpath("./div[contains(@class, 'dateHeader')]", dateInstance);
-                        dateHeader.innerHTML = date; // TODO format
+                        dateHeader.innerHTML = CalDash.utils.formatDate(date);
 
                         Utils.each(events, function (event) {
                             var eventInstance = Utils.clone('EventTemplate');
                             eventInstance.style.visibility = 'visible';
 
                             var eventTime = Utils.xpath("./div[contains(@class, 'eventTime')]", eventInstance);
-                            eventTime.innerHTML = item.summary;
+                            eventTime.innerHTML = CalDash.utils.formatTime(event);
                             var eventTitle = Utils.xpath("./div[contains(@class, 'eventTitle')]", eventInstance);
-                            eventTitle.innerHTML = item.summary;
+                            eventTitle.innerHTML = event.getTitle();
                             var eventPerson = Utils.xpath("./div[contains(@class, 'eventPerson')]", eventInstance);
-                            eventPerson.innerHTML = item.summary;
+                            eventPerson.innerHTML = event.getPerson();
                             var eventLocation = Utils.xpath("./div[contains(@class, 'eventLocation')]", eventInstance);
-                            eventLocation.innerHTML = item.summary;
+                            eventLocation.innerHTML = event.getLocation();
 
                             dateInstance.appendChild(eventInstance);
                         });

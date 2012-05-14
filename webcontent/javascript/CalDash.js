@@ -183,6 +183,14 @@ CalDash.utils = {
                 result.title = Utils.trim(text);
             }
         }
+    },
+
+    formatDate: function(myDate) {
+        return myDate.toFormat("DDD MMM DD");
+    },
+
+    formatTime: function(event) {
+        return event.getStartDate().toFormat("HH24:MI") + " - " + event.getEndDate().toFormat("HH24:MI");
     }
 
 };
