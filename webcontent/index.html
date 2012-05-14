@@ -33,9 +33,6 @@
         };
 
         var updateNextEvent = function(event) {
-            var ne = document.getElementById('next_event');
-            var header = document.getElementById('event_header');
-
             var type = document.getElementById('event_type');
             type.innerHTML = event.getType();
             var person = document.getElementById('event_person');
@@ -53,8 +50,8 @@
             var description = document.getElementById('event_abstract');
             description.innerHTML = event.getDescription();
 
-            // apply MathJax styling
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]); // TODO render only abstract
+            // render abstract with MathJax
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, description]);
         };
 
         var updateUpcomingEvents = function(eventManager) {
@@ -108,7 +105,6 @@
             var successHandler = function (response) {
 
                 var data = JSON.parse(response);
-                console.log(data);
 
 //                var now = new Date();
                 var now = new Date(Date.parse("2012-05-03T10:00:00+02:00"));
@@ -148,13 +144,15 @@
         </div>
         <div id='next_event'>
             <div id='event_header'>
-                <div id='event_type'></div>
-                <div id='event_location'></div>
-                <div id='event_person'></div>
-                <div id='event_title'></div>
+                <div id='event_header_main'>
+                    <div id='event_type'></div>
+                    <div id='event_location'></div>
+                    <div id='event_person'></div>
+                    <div id='event_title'></div>
+                    <div id='event_start'></div>
+                </div>
+                <div id='event_timer'></div>
             </div>
-            <div id='event_start'></div>
-            <div id='event_timer'></div>
             <div id='event_abstract'></div>
         </div>
     </div>
