@@ -191,6 +191,34 @@ CalDash.utils = {
 
     formatTime: function(event) {
         return event.getStartDate().toFormat("HH24:MI") + " - " + event.getEndDate().toFormat("HH24:MI");
+    },
+
+    formatTimeToStart: function(millisLeft) {
+        var resSingle = [ "second", "minute", "hour", "day" ];
+        var resMultiple = [ "seconds", "minutes", "hours", "days" ];
+        var getRes = function(count, idx) {
+            if (count > 1) {
+                return resMultiple[idx];
+            } else {
+                return resSingle[idx];
+            }
+        };
+        var factors = [ 60, 60, 24 ]; // minutes, hours, days
+        var diff = millisLeft / 1000.0;
+        var idx = 0;
+        while (idx < 3 && diff > factors[idx]) {
+            diff /= factors[idx];
+            idx++;
+        }
+
+        var intDiff = Math.abs(diff - Math.floor(diff));
+        var finalDiff = diff - intDiff;
+        var result = Math.floor(finalDiff) + " " + getRes(finalDiff, idx);
+        if (intDiff > 0) {
+            var rest = Math.floor(intDiff * factors[idx-1]);
+            result = result + " and " + rest + " " + getRes(rest, idx-1);
+        }
+        return result;
     }
 
 };

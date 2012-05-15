@@ -32,6 +32,14 @@ buster.testCase("CalDash - ", {
         assert.equals("Talk", parts.type);
         refute.defined(parts.person);
         assert.equals("Testing with buster.js", parts.title);
+    },
+
+    "correctness of formatTimeToStart()" : function() {
+        assert.equals("1 second", CalDash.utils.formatTimeToStart(1000));
+        assert.equals("2 seconds", CalDash.utils.formatTimeToStart(2000));
+        assert.equals("1 minute and 6 seconds", CalDash.utils.formatTimeToStart(66000));
+        assert.equals("3 hours and 25 minutes", CalDash.utils.formatTimeToStart(12345000));
+        assert.equals("6 hours and 45 minutes", CalDash.utils.formatTimeToStart(24348000));
     }
 
 });

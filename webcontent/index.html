@@ -32,7 +32,7 @@
             return "data.json";
         };
 
-        var updateNextEvent = function(event) {
+        var updateNextEvent = function(event, now) {
             var type = document.getElementById('event_type');
             type.innerHTML = event.getType();
             var person = document.getElementById('event_person');
@@ -45,13 +45,18 @@
             var start = document.getElementById('event_start');
             start.innerHTML = event.getStartDate();
             var timer = document.getElementById('event_timer');
-            timer.innerHTML = "TODO timer";
+            console.log(event.getStartDate().valueOf());
+            console.log(now.valueOf());
+            var millisLeft = event.getStartDate().valueOf() - now.valueOf();
+            timer.innerHTML = "starts in " + CalDash.utils.formatTimeToStart(millisLeft);
 
             var description = document.getElementById('event_abstract');
             description.innerHTML = event.getDescription();
 
             // render abstract with MathJax
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub, description]);
+            try {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, description]);
+            } catch (exception) {}
         };
 
         var updateUpcomingEvents = function(eventManager) {
@@ -107,14 +112,14 @@
                 var data = JSON.parse(response);
 
 //                var now = new Date();
-                var now = new Date(Date.parse("2012-05-03T10:00:00+02:00"));
+                var now = new Date(Date.parse("2012-05-03T08:01:00+02:00"));
 
                 var events = GoogleConverter.convert(data.items);
                 eventManager.setEvents(events);
                 eventManager.update(now);
 
                 // update ui
-                updateNextEvent(eventManager.getNextEvent());
+                updateNextEvent(eventManager.getNextEvent(), now);
                 updateUpcomingEvents(eventManager);
             };
 
