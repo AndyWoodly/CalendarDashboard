@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <!--
-  Copyright © Andreas Hölzl
   @author twitter.com/andywoodly
 -->
 <head>
@@ -45,8 +44,6 @@
             var start = document.getElementById('event_start');
             start.innerHTML = event.getStartDate();
             var timer = document.getElementById('event_timer');
-            console.log(event.getStartDate().valueOf());
-            console.log(now.valueOf());
             var millisLeft = event.getStartDate().valueOf() - now.valueOf();
             timer.innerHTML = "starts in " + CalDash.utils.formatTimeToStart(millisLeft);
 
