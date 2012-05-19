@@ -23,11 +23,10 @@
 
         var getCalendarUrl = function (now) {
             var url = config.baseUrl+config.calId+"/events?key="+config.apiKey;
+            url + '&timeMin='+CalDash.utils.formatRFC3339(now);
             if (config.options !== undefined) {
                 url + '&'+config.options;
             }
-            url + '&timeMin='+CalDash.utils.formatRFC3339(now);
-//            url = "data.json";
             return url;
         };
 
