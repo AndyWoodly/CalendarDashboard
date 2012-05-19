@@ -127,9 +127,6 @@
                 eventManager.update(now);
 
                 // update ui
-                var shield = document.getElementById('shield');
-                shield.style = 'hidden';
-
                 updateNextEvent(eventManager.getNextEvent(), now);
                 updateUpcomingEvents(eventManager);
             };
@@ -144,7 +141,9 @@
                 loadCalendar(now);
                 updateCounter = 0;
             } else {
-               eventManager.update(now);
+                eventManager.update(now);
+                updateNextEvent(eventManager.getNextEvent(), now);
+                updateUpcomingEvents(eventManager);
             }
             updateCounter += 1;
             var nextUpdate = config.updateEveryXSeconds*1000;
