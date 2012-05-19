@@ -192,6 +192,10 @@ CalDash.utils = {
     formatTime: function(event) {
         return event.getStartDate().toFormat("HH24:MI") + " - " + event.getEndDate().toFormat("HH24:MI");
     },
+    
+    formatRFC3339: function(date) {
+        return date.toFormat("YYYY-MM-DDTHH:MI:SSZ");
+    },
 
     formatTimeToStart: function(millisLeft) {
         var resSingle = [ "second", "minute", "hour", "day" ];

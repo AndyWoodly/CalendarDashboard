@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!--
+  Copyright © Andreas Hölzl
   @author twitter.com/andywoodly
 -->
 <head>
@@ -21,9 +22,13 @@
         var eventManager = new EventManager();
 
         var getCalendarUrl = function (now) {
-            // TODO retrieve only events in the future
-            return config.baseUrl+config.calId+"/events?key="+config.apiKey;
-//            return "data.json";
+            var url = config.baseUrl+config.calId+"/events?key="+config.apiKey;
+            if (config.options !== undefined) {
+                url + '&'+config.options;
+            }
+            url + '&timeMin='+CalDash.utils.formatRFC3339(now);
+//            url = "data.json";
+            return url;
         };
 
         var updateNextEvent = function(event, now) {
@@ -88,51 +93,64 @@
                 });
             }
         };
+        
+        var showShield = function(visible) {
+            var shield = document.getElementById('shield');
+            var main = document.getElementById('main');
+            if (visible === true) {
+                shield.style.visibility = 'visible';
+                shield.style.opacity = 1;
+                main.style.opacity = 0;
+                main.style.visibility = 'hidden';
+            } else {
+                shield.style.opacity = 0;
+                shield.style.visibility = 'hidden';
+                main.style.visibility = 'visible';
+                main.style.opacity = 1;
+            }
+        };
 
-        var loadCalendar = function () {
+        var loadCalendar = function (now) {
 
             var failureHandler = function (url, status) {
-                alert('Failed to load url ' + url + ', reason: ' + status);
-//                var loading_img = document.getElementById('loading_img');
-//                loading_img.style.visibility = 'hidden';
-//                var loading_text = document.getElementById('loading_text');
-//                loading_text.innerHtml = 'Failed to load url ' + url + ', reason: ' + status;
+                showShield(true);
+                var shield_img = document.getElementById('shield_img');
+                shield_img.style.visibility = 'hidden';
+                var shield_text = document.getElementById('shield_text');
+                shield_text.innerHtml = 'Failed to load url ' + url + ', reason: ' + status;
             };
 
             var successHandler = function (response) {
-
+                showShield(false);
                 var data = JSON.parse(response);
-
-                var now = new Date();
-//                var now = new Date(Date.parse("2012-05-03T08:01:00+02:00"));
-
                 var events = GoogleConverter.convert(data.items);
                 eventManager.setEvents(events);
                 eventManager.update(now);
 
                 // update ui
+                var shield = document.getElementById('shield');
+                shield.style = 'hidden';
+
                 updateNextEvent(eventManager.getNextEvent(), now);
                 updateUpcomingEvents(eventManager);
             };
 
-            Utils.getFile(getCalendarUrl(), successHandler, failureHandler);
+            Utils.getFile(getCalendarUrl(now), successHandler, failureHandler);
         };
 
     </script>
 </head>
 
-<body onload='loadCalendar()'>
+<body onload='loadCalendar(new Date)'>
 
-<!--div id="shield">
-    <div id='msg_frame'>
-        <div id='msg_content'>
-            <div id='loading_img'>
-                <img src="images/loading.gif"/>
-            </div>
-            <div id='loading_text'>Loading calendar ...</div>
+<div id="shield">
+    <div id='shield_content'>
+        <div id='shield_img'>
+            <!--img src="images/loading.gif"/-->
         </div>
+        <div id='shield_text'>Loading calendar ...</div>
     </div>
-</div-->
+</div>
 
 <div id='main'>
     <div id='main_pane'>

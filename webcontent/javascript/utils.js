@@ -2,7 +2,7 @@
  * Copyright Adam Iley, Andreas Hölzl
  * 
  * @author kybernetikos@gmail.com
- * @author andy.woodly@googlemail.com
+ * @author twitter.com/andy.woodly
  */
 
 var Utils = (function() {

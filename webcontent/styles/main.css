@@ -1,33 +1,32 @@
 html {
     height: 100%;
 	width: 100%;
-	font-size: 95%;
 }
 
 body {
+    top: 0;
 	margin: 0;
 	padding: 0;
 	height: 100%;
 	width: 100%;
 	font-family: Helevetica, sans-serif;
-	cursor: default;
-	overflow: hidden;
-	top: 0;
-	position: relative;
 }
 
-/* msg frame */
+/* shield */
 
-#msg_frame {
+#shield {
   position: absolute;
   top: 50%;
   left: 0px;
   width: 100%;
   height: 1px;
   overflow: visible;
+  z-index: 3;
+  opacity: 1;
+  visibility: 'visible';
 }
 
-#msg_content {
+#shield_content {
   width: 150px;
   height: 80px;
   margin-left: -75px;  /***  width / 2   ***/
@@ -36,16 +35,29 @@ body {
   left: 50%;
 }
 
-#loading_img {
+#shield_img {
     text-align: center;
 }
 
-#loading_text {
+#shield_text {
     text-align: center;
     color: #7a7a7a;
 }
 
 /* main */
+
+#main {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  z-index: 2;
+  opacity: 0;
+  visibility: 'hidden';
+  -webkit-transition: opacity 1s ease-in-out;
+}
 
 #main_pane {
     box-sizing: border-box;
