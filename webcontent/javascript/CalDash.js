@@ -86,7 +86,10 @@ var EventManager = (function(){
         for (d in uDates) {
             uDatesArray.push(new Date(Date.parse(d)));
         }
-        uDatesArray.sort();
+        uDatesArray.sort(function (a, b) {
+            // start date sort
+            return a.getTime() - b.getTime();
+        });
         this.dates = uDatesArray;
         this.dateEvents = uDateEvents;
     };
