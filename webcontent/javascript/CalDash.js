@@ -16,6 +16,7 @@ var Event = (function(){
 		this.location = (undefined === params.location ? '' : params.location);
 		this.startDate = (undefined === params.startDate ? undefined : params.startDate);
 		this.endDate = (undefined === params.endDate ? undefined : params.endDate);
+        this.allDay = (undefined === params.allDay ? false : params.allDay);
 	}
 
 	Event.prototype.getType = function() {
@@ -44,6 +45,10 @@ var Event = (function(){
 
 	Event.prototype.getEndDate = function() {
 		return this.endDate;
+	};
+
+    Event.prototype.isAllDay = function() {
+		return this.allDay;
 	};
 
 	return Event;
@@ -137,8 +142,13 @@ GoogleConverter.convertItem = function(item) {
 
     params.location = item.location;
     params.description = item.description;
-    params.startDate = new Date(Date.parse(item.start.dateTime));
-    params.endDate = new Date(Date.parse(item.end.dateTime));
+    var startTime = item.start.dateTime !== undefined ? item.start.dateTime : item.start.date;
+    params.startDate = new Date(Date.parse(startTime));
+    var endTime = item.end.dateTime !== undefined ? item.end.dateTime : item.end.date;
+    params.endDate = new Date(Date.parse(endTime));
+    if (item.start.date !== undefined) {
+        params.allDay = true;
+    }
     return new Event(params);
 };
 
@@ -193,7 +203,11 @@ CalDash.utils = {
     },
 
     formatTime: function(event) {
-        return event.getStartDate().toFormat("HH24:MI") + " - " + event.getEndDate().toFormat("HH24:MI");
+        if (event.isAllDay() === true) {
+            return 'all day';
+        } else {
+            return event.getStartDate().toFormat("HH24:MI") + " - " + event.getEndDate().toFormat("HH24:MI");
+        }
     },
     
     formatRFC3339: function(date) {
