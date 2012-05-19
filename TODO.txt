@@ -1,0 +1,5 @@
+TODO
+
+- fix dates spaning multiple days
+
+- test unhappy paths
