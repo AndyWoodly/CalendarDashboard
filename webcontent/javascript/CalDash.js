@@ -201,8 +201,12 @@ CalDash.utils = {
     formatDate: function(myDate) {
         return myDate.toFormat("DDD MMM DD");
     },
+    
+    formatDateTime: function(myDate) {
+        return myDate.toFormat("DDD MMM DD - HH24:MI");
+    },    
 
-    formatTime: function(event) {
+    formatTimeStartEnd: function(event) {
         if (event.isAllDay() === true) {
             return 'all day';
         } else {

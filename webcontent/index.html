@@ -41,7 +41,7 @@
             location.innerHTML = event.getLocation();
 
             var start = document.getElementById('event_start');
-            start.innerHTML = event.getStartDate();
+            start.innerHTML = CalDash.utils.formatDateTime(event.getStartDate());
             var timer = document.getElementById('event_timer');
             var millisLeft = event.getStartDate().valueOf() - now.valueOf();
             timer.innerHTML = "starts in " + CalDash.utils.formatTimeToStart(millisLeft);
@@ -78,7 +78,7 @@
                             eventInstance.style.visibility = 'visible';
 
                             var eventTime = Utils.xpath("./div[contains(@class, 'eventTime')]", eventInstance);
-                            eventTime.innerHTML = CalDash.utils.formatTime(event);
+                            eventTime.innerHTML = CalDash.utils.formatTimeStartEnd(event);
                             var eventTitle = Utils.xpath("./div[contains(@class, 'eventTitle')]", eventInstance);
                             eventTitle.innerHTML = event.getTitle();
                             var eventPerson = Utils.xpath("./div[contains(@class, 'eventPerson')]", eventInstance);
@@ -136,11 +136,25 @@
 
             Utils.getFile(getCalendarUrl(now), successHandler, failureHandler);
         };
+        
+        var updateCounter = 0;
+        var update = function() {
+            var now = new Date();
+            if (updateCounter % config.reloadEveryXUpdates === 0) {
+                loadCalendar(now);
+                updateCounter = 0;
+            } else {
+               eventManager.update(now);
+            }
+            updateCounter += 1;
+            var nextUpdate = config.updateEveryXSeconds*1000;
+            setTimeout(update, nextUpdate);
+        }
 
     </script>
 </head>
 
-<body onload='loadCalendar(new Date)'>
+<body onload='update()'>
 
 <div id="shield">
     <div id='shield_content'>
