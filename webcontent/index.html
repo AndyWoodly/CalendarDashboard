@@ -11,24 +11,19 @@
     <script type="text/javascript"
             src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
+    <script src="javascript/config.js"></script>
     <script src="javascript/utils.js"></script>
     <script src="javascript/date-utils.js"></script>
     <script src="javascript/CalDash.js"></script>
 
     <script type="text/javascript">
 
-        // https://www.googleapis.com/calendar/v3/calendars/a0i2n11sc0e74d813ishbpiiso%40group.calendar.google.com/events?key=AIzaSyBxpeKeOwcenFKoYcjA4wMeVCEPdpN7GRo
-
         var eventManager = new EventManager();
 
-        var getCalendarUrl = function () {
-            var baseUrl = 'https://www.googleapis.com/calendar/v3/calendars/';
-            var calId = 'a0i2n11sc0e74d813ishbpiiso%40group.calendar.google.com';
-            var apiKey = 'AIzaSyBxpeKeOwcenFKoYcjA4wMeVCEPdpN7GRo';
-            var timezone = 'Europe/Paris';
-
-            //return baseUrl+calId+"/events?key="+apiKey;
-            return "data.json";
+        var getCalendarUrl = function (now) {
+            // TODO retrieve only events in the future
+            return config.baseUrl+config.calId+"/events?key="+config.apiKey;
+//            return "data.json";
         };
 
         var updateNextEvent = function(event, now) {
@@ -108,8 +103,8 @@
 
                 var data = JSON.parse(response);
 
-//                var now = new Date();
-                var now = new Date(Date.parse("2012-05-03T08:01:00+02:00"));
+                var now = new Date();
+//                var now = new Date(Date.parse("2012-05-03T08:01:00+02:00"));
 
                 var events = GoogleConverter.convert(data.items);
                 eventManager.setEvents(events);
