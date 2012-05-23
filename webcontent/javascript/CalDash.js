@@ -75,6 +75,7 @@ var EventManager = (function(){
             if (me.date <= event.getStartDate() || me.date < event.getEndDate()) {
                 uEvents.push(event);
                 var eventDate = (me.date <= event.getStartDate() ? event.getStartDate() : event.getEndDate());
+                // TODO handle multi-day events
                 eventDate = eventDate.clone().clearTime();
                 uDates[eventDate] = true;
                 var events = uDateEvents[eventDate];

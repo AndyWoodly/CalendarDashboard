@@ -1,5 +1,7 @@
 TODO
 
+- fix multi-day events
+- fix "starts in 14 hours and 0 minute"
 - fix dates spaning multiple days
 
 - test unhappy paths
