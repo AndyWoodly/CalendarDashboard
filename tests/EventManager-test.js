@@ -77,11 +77,35 @@ buster.testCase("EventManager - ", {
     "update - all events elapsed" : function() {
         var manager = this.manager;
 
-        var now = new Date(Date.parse("2012-05-13T13:00:00+00:00"));
+        var now = new Date(Date.parse("2012-05-25T13:00:00+00:00"));
         manager.update(now);
 
         var dates = manager.getDates();
         assert.equals(0, dates.length);
+    },
+
+    "update - multi day event" : function() {
+        var event4 = new Event(
+                {
+                    title: "event4",
+                    startDate: new Date(Date.parse("2012-05-21")),
+                    endDate: new Date(Date.parse("2012-05-23")),
+                    isAllDay: true
+                }
+        );
+
+        var manager = new EventManager(
+                { events: [event4] }
+        );
+
+        var now = new Date(Date.parse("2012-05-20T00:00:00+00:00"));
+        manager.update(now);
+
+        var dates = manager.getDates();
+        assert.equals(3, dates.length);
+        assert.equals(21, dates[0].getDate());
+        assert.equals(22, dates[1].getDate());
+        assert.equals(23, dates[2].getDate());
     }
 
 });

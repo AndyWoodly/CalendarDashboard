@@ -74,16 +74,20 @@ var EventManager = (function(){
         Utils.each(this.events, function(event) {
             if (me.date <= event.getStartDate() || me.date < event.getEndDate()) {
                 uEvents.push(event);
-                var eventDate = (me.date <= event.getStartDate() ? event.getStartDate() : event.getEndDate());
+                var baseDate = (me.date <= event.getStartDate() ? event.getStartDate() : event.getEndDate());
                 // TODO handle multi-day events
-                eventDate = eventDate.clone().clearTime();
-                uDates[eventDate] = true;
-                var events = uDateEvents[eventDate];
-                if (events === undefined) {
-                    events = [];
-                    uDateEvents[eventDate] = events;
+                baseDate = baseDate.clone().clearTime();
+                var eventDate = baseDate;
+                while (eventDate < event.getEndDate()) {
+                    uDates[baseDate] = true;
+                    var events = uDateEvents[baseDate];
+                    if (events === undefined) {
+                        events = [];
+                        uDateEvents[baseDate] = events;
+                    }
+                    events.push(event);
+                    eventDate.addDays(1);
                 }
-                events.push(event);
             }
         });
         this.setEvents(uEvents);
